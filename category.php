@@ -12,44 +12,118 @@ if (isset($_GET['id'])) {
                             WHERE categories.id = $category_id");
 
     if ($result->num_rows > 0) {
-        echo "<h2>Layouts in Category: " . htmlspecialchars($result->fetch_assoc()['category_name']) . "</h2>";
+        $category_name = htmlspecialchars($result->fetch_assoc()['category_name']);
+        ?>
 
-        // Reposicione a consulta para voltar ao início dos resultados
+        <h2 class="title-primary-category">Layouts na Categoria: <?= $category_name ?></h2>
+
+        <?php
+        // Reposicionar a consulta para voltar ao início dos resultados
         $result->data_seek(0); // Volta para o início do resultado
 
         while ($row = $result->fetch_assoc()) {
-            echo "<div class='layout'>";
-            echo "<h3>" . htmlspecialchars($row['name']) . " (" . htmlspecialchars($row['category_name']) . ")</h3>";
-            
-            // Exibir HTML
-            echo "<h4>HTML Code:</h4>";
-            echo "<pre><code class='language-html' id='html-code'>" . htmlspecialchars($row['html']) . "</code></pre>";
-            echo "<button onclick='copyToClipboard(" . json_encode($row['html']) . ")'>Copy HTML</button>";
-            
-            // Exibir CSS
-            if (!empty($row['css'])) {
-                echo "<h4>CSS Code:</h4>";
-                echo "<pre><code class='language-css' id='css-code'>" . htmlspecialchars($row['css']) . "</code></pre>";
-                echo "<button onclick='copyToClipboard(" . json_encode($row['css']) . ")'>Copy CSS</button>";
-            }
-            
-            // Exibir JS
-            if (!empty($row['js'])) {
-                echo "<h4>JS Code:</h4>";
-                echo "<pre><code class='language-javascript' id='js-code'>" . htmlspecialchars($row['js']) . "</code></pre>";
-                echo "<button onclick='copyToClipboard(" . json_encode($row['js']) . ")'>Copy JS</button>";
-            }
+            $layout_name = htmlspecialchars($row['name']);
+            $category_name = htmlspecialchars($row['category_name']);
+            $html_code = htmlspecialchars($row['html']);
+            $css_code = !empty($row['css']) ? htmlspecialchars($row['css']) : null;
+            $js_code = !empty($row['js']) ? htmlspecialchars($row['js']) : null;
+            $layout_id = intval($row['id']);
 
-            // Div para a pré-visualização
-            echo "<h4>Preview:</h4>";
-            echo "<iframe class='preview' style='width: 100%; height: 300px; border: 1px solid #ccc;'></iframe>";
+            // IDs únicos para cada código e iframe
+            $html_id = "html-code-" . $layout_id;
+            $css_id = $css_code ? "css-code-" . $layout_id : null;
+            $js_id = $js_code ? "js-code-" . $layout_id : null;
+            $iframe_id = "iframe-preview-" . $layout_id;
+            ?>
 
-            // Botão para deletar o layout
-            echo "<br><br><a href='?id=" . $category_id . "&delete_id=" . $row['id'] . "' onclick=\"return confirm('Are you sure you want to delete this layout?');\">Delete</a>";
-            echo "</div><hr>";
+            <div class="layout">
+                <div class="wrapper">
+                    <h3><?= $layout_name ?> (<?= $category_name ?>)</h3>
+
+                    <!-- Pré-visualização -->
+                    <h4>Preview:</h4>
+                    <div>
+                        <iframe class="preview" id="<?= $iframe_id ?>">
+
+                        </iframe>
+                    </div>
+                    <div class="content-general-code">
+                    <!-- Exibir HTML -->
+                    <div class="content-code">
+                        <h4>HTML Code:</h4>
+                        <pre><code class="language-html" id="<?= $html_id ?>"><?= $html_code ?></code></pre>
+                        <button onclick="copyToClipboard('<?= $html_id ?>')">Copy HTML</button>
+                    </div>
+                    <!-- Exibir CSS, se disponível -->
+                    <?php if ($css_code): ?>
+                        <div class="content-code">
+                            <h4>CSS Code:</h4>
+                            <pre><code class="language-css" id="<?= $css_id ?>"><?= $css_code ?></code></pre>
+                            <button onclick="copyToClipboard('<?= $css_id ?>')">Copy CSS</button>
+                        </div>
+                    <?php endif; ?>
+
+                    <!-- Exibir JS, se disponível -->
+                    <?php if ($js_code): ?>
+                        <div class="content-code">
+                            <h4>JS Code:</h4>
+                            <pre><code class="language-javascript" id="<?= $js_id ?>"><?= $js_code ?></code></pre>
+                            <button onclick="copyToClipboard('<?= $js_id ?>')">Copy JS</button>
+                        </div>
+                    <?php endif; ?>
+                    </div>
+                    <!-- Botão para deletar o layout -->
+                    <br><br>
+                    <!-- <a class="btn-delete-category" href="?id=<?= $category_id ?>&delete_id=<?= $layout_id ?>"
+                        onclick="return confirm('Are you sure you want to delete this layout?');">Deletar Layout</a> -->
+                </div>
+
+
+
+            </div>
+
+            <hr>
+
+            <script>
+                // Função para atualizar a pré-visualização de cada layout
+                function updatePreview(layoutId) {
+                    const htmlCode = document.getElementById('html-code-' + layoutId).textContent;
+                    const cssCode = document.getElementById('css-code-' + layoutId) ? document.getElementById('css-code-' + layoutId).textContent : '';
+                    const jsCode = document.getElementById('js-code-' + layoutId) ? document.getElementById('js-code-' + layoutId).textContent : '';
+
+                    const iframe = document.getElementById('iframe-preview-' + layoutId);
+                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+                    try {
+                        iframeDoc.open();
+                        iframeDoc.write(`
+                                        <html>
+                                            <head>
+                                                <style>${cssCode}</style>
+                                            </head>
+                                            <body>
+                                                <div class="content-preview" style="height: 100%; width: 100%; display: flex; justify-content: center; align-items: center;">
+                                                    ${htmlCode}
+                                                    <script>${jsCode}<\/script>
+                                                </div>
+                                            </body>
+                                        </html>
+                                    `);
+                        iframeDoc.close();
+                    } catch (error) {
+                        console.error("Error updating preview: ", error);
+                    }
+                }
+
+                // Atualizar a pré-visualização desse layout específico
+                updatePreview(<?= $layout_id ?>);
+            </script>
+
+
+            <?php
         }
     } else {
-        echo "No layouts found in this category.";
+        echo "<p>No layouts found in this category.</p>";
     }
 
     // Verificar se a solicitação é para deletar um layout
@@ -59,11 +133,11 @@ if (isset($_GET['id'])) {
 
         if ($conn->query($sql) === TRUE) {
             echo "<p>Layout deleted successfully!</p>";
-            
+
             // Checar se a tabela está vazia
             $result = $conn->query("SELECT COUNT(*) AS total FROM layouts");
             $row = $result->fetch_assoc();
-            
+
             if ($row['total'] == 0) {
                 // Resetar o AUTO_INCREMENT se não houver mais layouts
                 $conn->query("ALTER TABLE layouts AUTO_INCREMENT = 1");
@@ -73,56 +147,51 @@ if (isset($_GET['id'])) {
         }
     }
 } else {
-    echo "No category ID provided.";
+    echo "<p>No category ID provided.</p>";
 }
 ?>
 
 <script>
-function copyToClipboard(text) {
-    // Cria um elemento temporário para copiar o texto
-    const tempInput = document.createElement("textarea");
-    tempInput.value = text;
-    document.body.appendChild(tempInput);
-    tempInput.select();
-    document.execCommand("copy"); // Copia o texto
-    document.body.removeChild(tempInput); // Remove o elemento temporário
 
-    // Alerta opcional para informar que o texto foi copiado
-    alert("Código copiado para a área de transferência!");
-}
 
-// Função para atualizar a pré-visualização
-function updatePreview() {
-    const htmlCode = document.getElementById('html-code').textContent;
-    const cssCode = document.getElementById('css-code') ? document.getElementById('css-code').textContent : '';
-    const jsCode = document.getElementById('js-code') ? document.getElementById('js-code').textContent : '';
+    // Inicializa o Highlight.js e atualiza a pré-visualização
+    document.addEventListener("DOMContentLoaded", function () {
+        // Realiza a chamada para atualizar a pré-visualização
+        <?php
+        // Reposicionar a consulta para voltar ao início dos resultados
+        $result->data_seek(0); // Volta para o início do resultado
+        
+        while ($row = $result->fetch_assoc()) {
+            $layout_id = intval($row['id']);
+            echo "updatePreview($layout_id);"; // Atualiza a pré-visualização de cada layout
+        }
+        ?>
 
-    const iframe = document.querySelector('.preview');
-    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+        hljs.highlightAll(); // Chama o Highlight.js após a atualização da pré-visualização
+    });
 
-    // Limpa o conteúdo do iframe
-    iframeDoc.open();
-    iframeDoc.write(`
-        <html>
-            <head>
-                <style>${cssCode}</style>
-            </head>
-            <body>
-                ${htmlCode}
-                <script>${jsCode}<\/script>
-            </body>
-        </html>
-    `);
-    iframeDoc.close();
-}
 
-// Inicializa o Highlight.js
-document.addEventListener("DOMContentLoaded", function() {
-    hljs.highlightAll();
-    updatePreview(); // Chama a função para atualizar a pré-visualização
-});
+    function copyToClipboard(elementId) {
+        const codeElement = document.getElementById(elementId);
+
+        // Verifica se o elemento existe
+        if (!codeElement) {
+            alert("Elemento não encontrado: " + elementId);
+            return;
+        }
+
+        // Usa a Clipboard API
+        navigator.clipboard.writeText(codeElement.textContent.trim())
+            .then(() => {
+                alert("Código copiado para a área de transferência!");
+            })
+            .catch(err => {
+                console.error('Falha ao copiar: ', err);
+                alert("Falha ao copiar o código.");
+            });
+    }
+
+
 </script>
 
-<?php
-include('footer.php'); // Inclui o rodapé
-?>
+<?php include('footer.php'); ?>

@@ -2,34 +2,41 @@
 include('head.php');
 ?>
 
-
-    <h1>Welcome to Layout Library</h1>
-    <a href="dashboard.php">View Layouts</a>
-    <a href="add_code.php">Add New Layout</a>
+<div class="container">
+    <div class="wrapper content-home">
 
 
-    <?php
-    include 'db_connection.php';
+        <div class="content-title-home">
+            <h1>Bem-vindo a Galeria de Layouts</h1>
+          
+                <!-- <a href="dashboard.php">Visualizar Layouts</a> -->
+                <a href="add-code.php">Adicionar novo Layout</a>
+    
+        </div>
+        <div class="group-button-categories">
+            <?php
+            include 'db_connection.php';
 
-    // Consulta para obter todas as categorias
-    $result = $conn->query("SELECT * FROM categories");
+            // Consulta para obter todas as categorias
+            $result = $conn->query("SELECT * FROM categories");
 
-    if ($result->num_rows > 0) {
-        echo "<h2>Categories</h2>";
-        echo "<div class='categories'>"; // Container para os botões
-        while ($row = $result->fetch_assoc()) {
-            // Cria um botão para cada categoria
-            echo "<button onclick=\"window.location.href='category.php?id=" . $row['id'] . "'\">" . htmlspecialchars($row['name']) . "</button>";
-        }
-        echo "</div>";
-    } else {
-        echo "No categories found.";
-    }
-    ?>
+            if ($result->num_rows > 0): ?>
+                <h2>Categories</h2>
+                <div class='categories'> <!-- Container para os botões -->
+                    <?php while ($row = $result->fetch_assoc()): ?>
+                        <!-- Cria um botão para cada categoria -->
+                        <button onclick="window.location.href='category.php?id=<?= $row['id']; ?>'">
+                            <?= htmlspecialchars($row['name']); ?>
+                        </button>
+                    <?php endwhile; ?>
+                </div>
+            <?php else: ?>
+                <p>No categories found.</p>
+            <?php endif; ?>
 
-
+        </div>
+    </div>
+</div>
 <?php
 include('footer.php');
 ?>
-
-

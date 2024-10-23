@@ -1,0 +1,136 @@
+/* Reset CSS */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+/* Reset body defaults */
+body {
+  line-height: 1.5;
+  margin: 0;
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote::before, blockquote::after,
+q::before, q::after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Inputs and buttons reset */
+input, button, textarea, select {
+  font: inherit;
+  outline: none;
+}
+
+/* Anchor tag reset */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+html {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  height: 100%;
+}
+main {
+    background-image: linear-gradient(to right top, #071427, #08162a, #08172d, #081930, #091a33);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+
+  }
+  
+  h1 {
+    font-size: var(--heading-size-h1);
+    color: var(--title-color);
+  }
+
+  h2 {
+    font-size: var(--heading-size-h2);
+    color: var(--title-color);
+  }
+  h3 {
+    font-size: var(--heading-size-h3);
+    color: var(--title-color);
+  }
+
+  p {
+    font-weight: 300;
+    margin: 5px 0;
+  }
+  
+  button {
+    background-color: var(--primary-color);
+    color: #fff;
+    border-radius: var(--button-radius);
+    box-shadow: var(--button-shadow);
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  
+  .wrapper {
+	max-width: var(--wrapper-width);
+	width: 100%;
+	margin: 0 auto;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 0 10px;
+}
+
+.container {
+	max-width: var(--container-max-width);
+	width: 100%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 32px 0;
+	clear: both;
+
+  flex: 1;
+}
+
+.grandient {
+  background: linear-gradient(90deg, #3382f8, #fcfeff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+  
+.bg-color {
+  background-color: var(--bg-color);
+}
+
+.sub-title {
+  margin: 0;
+}
