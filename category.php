@@ -52,14 +52,14 @@ if (isset($_GET['id'])) {
                     <div class="content-code">
                         <h4>HTML Code:</h4>
                         <pre><code class="language-html" id="<?= $html_id ?>"><?= $html_code ?></code></pre>
-                        <button onclick="copyToClipboard('<?= $html_id ?>')">Copy HTML</button>
+                        <button onclick="copyToClipboard('<?= $html_id ?>')">Copiar HTML</button>
                     </div>
                     <!-- Exibir CSS, se disponível -->
                     <?php if ($css_code): ?>
                         <div class="content-code">
                             <h4>CSS Code:</h4>
                             <pre><code class="language-css" id="<?= $css_id ?>"><?= $css_code ?></code></pre>
-                            <button onclick="copyToClipboard('<?= $css_id ?>')">Copy CSS</button>
+                            <button onclick="copyToClipboard('<?= $css_id ?>')">Copiar CSS</button>
                         </div>
                     <?php endif; ?>
 
@@ -68,7 +68,7 @@ if (isset($_GET['id'])) {
                         <div class="content-code">
                             <h4>JS Code:</h4>
                             <pre><code class="language-javascript" id="<?= $js_id ?>"><?= $js_code ?></code></pre>
-                            <button onclick="copyToClipboard('<?= $js_id ?>')">Copy JS</button>
+                            <button onclick="copyToClipboard('<?= $js_id ?>')">Copiar JS</button>
                         </div>
                     <?php endif; ?>
                     </div>
