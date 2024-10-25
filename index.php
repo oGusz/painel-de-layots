@@ -8,10 +8,10 @@ include('head.php');
 
         <div class="content-title-home">
             <h1>Bem-vindo a Galeria de Layouts</h1>
-          
-                <!-- <a href="dashboard.php">Visualizar Layouts</a> -->
-                <a href="add-code.php">Adicionar novo Layout</a>
-    
+
+            <!-- <a href="dashboard.php">Visualizar Layouts</a> -->
+            <a href="add-code.php">Adicionar novo Layout</a>
+
         </div>
         <div class="group-button-categories">
             <?php

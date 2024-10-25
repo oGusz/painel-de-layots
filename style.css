@@ -257,15 +257,20 @@
   align-items: flex-start;
   width: 100%;
   flex-direction: column;
+  width: 100%;
+  height: 600px;
 }
 
 .content-code pre {
   width: 100%;
+  overflow-y: scroll;
   margin-block: 0.5rem;
   border-radius: var(--border-radius);
 
 }
-
+.content-code pre code{
+  overflow-x: hidden;
+}
 .content-code button {
   transition: all .4s ease-out;
 }
@@ -284,6 +289,102 @@
 
 /* END PAGE CATEGORY */
 
+
+/* ADD CODE */
+.wrapper-form-add h2 {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.wrapper-form-add form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 2rem;
+}
+
+.wrapper-form-add form label {
+  text-align: left;
+}
+
+.wrapper-form-add form input,
+.wrapper-form-add form textarea,
+.wrapper-form-add form select {
+  width: 650px;
+
+  height: 50px;
+}
+
+.editor {
+  width: 100%;
+  border: 1px solid #ccc;
+ 
+  overflow: auto;
+}
+.input-textarea {
+  margin-top: 3rem;
+}
+.input-textarea .input__label {
+  top: -42px;
+}
+.editor pre code{
+  width: 650px;
+  height: 500px;
+}
+.input {
+  position: relative;
+}
+
+.input__label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: calc(.5rem * 0.75) calc(.5rem * 0.5);
+  margin: calc(.5rem * 0.75 + 3px) calc(.5rem * 0.5);
+  
+  white-space: nowrap;
+  transform: translate(0, 0);
+  transform-origin: 0 0;
+
+  transition: transform 120ms ease-in;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.input__field {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border: 2px solid currentColor;
+  padding: calc(.5rem * 1.5) .5rem;
+  color: currentColor;
+  background: transparent;
+  border-radius: var(--border-radius);
+}
+
+.input__field:focus+.input__label,
+.input__field:not(:placeholder-shown)+.input__label {
+  transform: translate(0.25rem, -65%) scale(0.8);
+  color: white;
+  background: var(--bg-color);
+}
+.input__field option {
+ border-radius: 20px 20px 10px 10px;
+  background-color:  var(--bg-color);
+}
+
+.btn-submit-add-code {
+  cursor: pointer;
+  transition: all .1s ease-in;
+  border-radius: var(--border-radius);
+}
+.btn-submit-add-code:hover {
+  background-color: var(--link-color);
+  color: white;
+}
+/* END ADD CODE */
 
 /* FOOTER */
 footer {}
