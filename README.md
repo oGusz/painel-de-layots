@@ -6,3 +6,7 @@ Usados
 
 highlight js
 Clipboard API
+jQuery
+Toastr
+CodeMirror
+Owl Carousel
