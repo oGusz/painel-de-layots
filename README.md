@@ -22,11 +22,13 @@ Este repositório contém um painel de gerenciamento de layouts, desenvolvido co
 ## 🛠 Tecnologias Utilizadas
 
 - Back-End: PHP para manipulação de dados e renderização de layouts dinâmicos.
-- 
+  
 - Banco de Dados: MySQL para armazenamento e recuperação de dados dos layouts.
-- 
+  
 - Front-End: HTML, CSS e JavaScript para interface e interação.
-- 
+
+
+  
 #### Bibliotecas e Ferramentas Auxiliares:
 - Highlight.js: Para destacar trechos de código com diferentes sintaxes.
   
