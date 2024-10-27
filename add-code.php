@@ -115,21 +115,21 @@ if (isset($_GET['delete_id'])) {
         });
     }
 
-    // Ao submeter o formulário, sincronize o conteúdo dos editores com os campos escondidos
+  
     document.querySelector('form').addEventListener('submit', function(e) {
         const htmlField = document.createElement('textarea');
         htmlField.name = 'html';
-        htmlField.value = document.getElementById('html-editor').innerText; // Captura o texto do editor
+        htmlField.value = document.getElementById('html-editor').innerText; 
         e.target.appendChild(htmlField);
 
         const cssField = document.createElement('textarea');
         cssField.name = 'css';
-        cssField.value = document.getElementById('css-editor').innerText; // Captura o texto do editor
+        cssField.value = document.getElementById('css-editor').innerText; 
         e.target.appendChild(cssField);
 
         const jsField = document.createElement('textarea');
         jsField.name = 'js';
-        jsField.value = document.getElementById('js-editor').innerText; // Captura o texto do editor
+        jsField.value = document.getElementById('js-editor').innerText; 
         e.target.appendChild(jsField);
     });
 

@@ -78,8 +78,9 @@ if (isset($_GET['id'])) {
 
         <?php
     } else {
-        echo "<p>No layouts found in this category.</p>";
+        echo "<div class='container'><div class='wrapper'><p style='text-align:center; margin-top:4rem;'>No layouts found in this category.</p></div></div>";
     }
+    
 
     if (isset($_GET['delete_id'])) {
         $id = intval($_GET['delete_id']);
@@ -113,7 +114,7 @@ if (isset($_GET['id'])) {
             }
             ?>
             hljs.highlightAll();
-        }, 0); // Aguarda o carregamento total do DOM
+        }, 0); 
     });
 
 
@@ -167,11 +168,16 @@ if (isset($_GET['id'])) {
 <script>
     $(document).ready(function () {
         $(".carrosel-owl-category").owlCarousel({
-            items: 1,             // Número de itens a serem exibidos
-            loop: false,           // Loop contínuo
-            autoplay: false,      // Desativar autoplay
-            nav: true,            // Ativar navegação
-            dots: true            // Ativar pontos de navegação
+            items: 1,
+            loop: false,
+            autoplay: false,
+            nav: true,
+            navText: [
+                
+                "<i class='fa-solid fa-chevron-left'></i>",
+                "<i class='fa-solid fa-chevron-right'></i>"
+            ],
+            dots: false
         });
     });
 </script>

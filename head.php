@@ -44,6 +44,10 @@ $url = 'http://localhost/painel-de-layots/'
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="fontawesome-6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 
 
 
