@@ -47,7 +47,9 @@ Este repositório contém um painel de gerenciamento de layouts, desenvolvido co
 
 ## 📋 Pré-requisitos
 - PHP 7.0 ou superior
+  
 - MySQL
+  
 - Servidor local, como XAMPP ou WAMP
 
 
