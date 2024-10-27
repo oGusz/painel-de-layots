@@ -177,7 +177,9 @@ if (isset($_GET['id'])) {
                 "<i class='fa-solid fa-chevron-left'></i>",
                 "<i class='fa-solid fa-chevron-right'></i>"
             ],
-            dots: false
+            dots: false,
+            mouseDrag: false,       
+            touchDrag: false 
         });
     });
 </script>

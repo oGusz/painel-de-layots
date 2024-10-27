@@ -82,7 +82,7 @@ if (isset($_GET['delete_id'])) {
                 <label class="input input-textarea" for="js">
                     <span class="input__label">JAVASCRIPT :</span>
                     <div id="js-editor" contenteditable="true" class="editor"></div>
-                </label><br>
+                </label>
                 <input class="btn-submit-add-code" type="submit" value="Enviar Layout">
             </form>
         </div>

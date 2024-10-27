@@ -21,7 +21,7 @@ include('head.php');
             $result = $conn->query("SELECT * FROM categories");
 
             if ($result->num_rows > 0): ?>
-                <h2>Categories</h2>
+                <h2>Categorias</h2>
                 <div class='categories'> <!-- Container para os botões -->
                     <?php while ($row = $result->fetch_assoc()): ?>
                         <!-- Cria um botão para cada categoria -->

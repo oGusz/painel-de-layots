@@ -76,13 +76,13 @@
 #menu ul {
   display: none;
   opacity: 0;
-  /* Inicialmente invisível */
+
   transform: scale(0.8);
-  /* Começa ligeiramente menor */
+
   transform-origin: top right;
-  /* O ponto de origem da animação é no canto superior direito */
+
   transition: opacity 0.3s ease, transform 0.3s ease;
-  /* Animação suave para opacidade e tamanho */
+
 }
 
 #menu ul li {
@@ -107,9 +107,9 @@
   right: 0;
   background: var(--primary-color);
   opacity: 1;
-  /* Totalmente visível quando aberto */
+  z-index: 9;
   transform: scale(1);
-  /* Retorna ao tamanho original */
+  
 }
 
 .hamburger-icon {
@@ -117,7 +117,7 @@
   font-size: 20px;
   cursor: pointer;
   transition: transform 0.3s ease, opacity 0.3s ease;
-  /* Transição suave para escala e opacidade */
+
 }
 
 .hamburger-icon.open {
@@ -135,7 +135,7 @@
 /* WebKit (Chrome, Safari, Edge) */
 #menu ul.overflow::-webkit-scrollbar {
   width: 8px;
-  /* Largura da barra de rolagem */
+
 }
 
 #menu ul.overflow::-webkit-scrollbar-thumb {
@@ -187,7 +187,7 @@
 
 .categories button {
   transition: all .3s ease-in-out;
-  width: 180px;
+  width: 11.25rem;
   padding: 1rem;
 }
 
@@ -246,7 +246,7 @@
 
 .preview {
   width: 100%;
-  height: 600px;
+  height: 37.5rem;
   border: 4px solid var(--secondary-color);
   border-radius: var(--border-radius);
   background-color: white;
@@ -255,10 +255,10 @@
 .content-code {
   display: flex;
   align-items: flex-start;
-  width: 100%;
   flex-direction: column;
   width: 100%;
-  height: 600px;
+  max-height: 29.5rem;
+  justify-content: flex-start;
 }
 
 .content-code pre {
@@ -330,9 +330,9 @@ font-size: var(--font-size-lg);
 .wrapper-form-add form input,
 .wrapper-form-add form textarea,
 .wrapper-form-add form select {
-  width: 650px;
+  width: 40.625rem;
 
-  height: 50px;
+  height: 3.125rem;
 }
 
 .editor {
@@ -348,8 +348,8 @@ font-size: var(--font-size-lg);
   top: -42px;
 }
 .editor pre code{
-  width: 650px;
-  height: 500px;
+  width: 40.625rem;
+  height: 31.25rem;
 }
 .input {
   position: relative;
